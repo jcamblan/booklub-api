@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-User.create(email: 'admin@booklub.app', password: 'password')
+Fabricate(:user, email: 'admin@booklub.app')

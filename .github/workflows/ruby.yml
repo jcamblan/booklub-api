@@ -1,0 +1,73 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will download a prebuilt Ruby version, install dependencies and run tests with Rake
+# For more information see: https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby
+
+name: Ruby
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches: [] # Run for every pull request
+
+jobs:
+  lint_and_security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Retreive repository
+        uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6.6
+      - name: Install dependencies
+        run: gem install activesupport:6.0.3.2 rubocop rubocop-rails rubocop-rspec brakeman bundler-audit
+      - name: Bundle audit
+        run: bundle audit check --update
+      - name: Rubocop Linter
+        run: rubocop
+      - name: Brakeman
+        run: brakeman
+  test:
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: postgres:9
+        ports: ["5432:5432"]
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis
+        ports: ["6379:6379"]
+        options: --entrypoint redis-server
+    steps:
+      - name: Retreive repository
+        uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6.6
+          bundler-cache: true
+      - name: Setup database
+        run: bundle exec rails db:create db:schema:load
+        env:
+          DATABASE_URL: postgres://postgres:postgres@127.0.0.1/test
+          RAILS_ENV: test
+      - name: Run test & publish code coverage
+        uses: paambaati/codeclimate-action@v2.6.0
+        with:
+          coverageCommand: bundle exec rails spec
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE_REPORTER_ID }}
+          DATABASE_URL: postgres://postgres:postgres@127.0.0.1/test
+          RAILS_ENV: test
+          BASE_DOMAIN: http://localhost:3000

@@ -1,0 +1,23 @@
+pre-push:
+  parallel: true
+  commands:
+    rspec:
+      tags: backend test
+      run: bundle exec rspec -f failures
+
+pre-commit:
+  commands:
+    rubocop:
+      tags: backend style
+      glob: "*.rb"
+      run: bundle exec rubocop --force-exclusion {staged_files}
+
+# requires commitlint:
+#
+# npm install --save-dev @commitlint/{config-conventional,cli}
+# echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js
+#
+commit-msg:
+  commands:
+    commitlint:
+      run: npx commitlint -e

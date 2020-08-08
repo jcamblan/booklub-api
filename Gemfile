@@ -13,12 +13,11 @@ gem 'graphql', '~> 1.10' # https://github.com/rmosolgo/graphql-ruby
 gem 'mutations', '~> 0.9' # https://github.com/cypriss/mutations
 gem 'pg', '>= 0.18', '< 2.0' # https://github.com/ged/ruby-pg
 gem 'puma', '~> 4.1' # https://github.com/ankane/lockbox
+gem 'rack-cors'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
+gem 'sidekiq', '~> 6.1'
 gem 'simplecov', '~> 0.18.5' # https://github.com/colszowka/simplecov
 gem 'strong_migrations', '~> 0.6' # https://github.com/ankane/strong_migrations
-
-# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
 
 group :development, :test do
   gem 'brakeman' # https://github.com/presidentbeef/brakeman

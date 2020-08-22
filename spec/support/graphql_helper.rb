@@ -11,7 +11,7 @@ module Requests
     # by default. It's convenient when you don't have anything really complicated to test.
     # And when you need to test multiple requests, you can call it with arguments.
     # AccessToken is also generated in here rather than in specs files like I did for a long time
-    def do_graphql_request(user: nil, qry: nil, var: nil) # rubocop:disable Metrics/CyclomaticComplexity
+    def do_graphql_request(user: nil, qry: nil, var: nil) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
       token = if user&.id || current_user&.id
                 Fabricate(:token, resource_owner_id: user&.id || current_user&.id)
               end

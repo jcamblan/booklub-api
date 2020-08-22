@@ -9,17 +9,17 @@ class User < ApplicationRecord
 
   # == Relationships ===========================================================
 
+  # rubocop:disable Rails/InverseOf
   has_many :access_grants,
            class_name: 'Doorkeeper::AccessGrant',
            foreign_key: :resource_owner_id,
-           dependent: :delete_all,
-           inverse_of: :user
+           dependent: :delete_all
 
   has_many :access_tokens,
            class_name: 'Doorkeeper::AccessToken',
            foreign_key: :resource_owner_id,
-           dependent: :delete_all,
-           inverse_of: :user
+           dependent: :delete_all
+  # rubocop:enable Rails/InverseOf
 
   # == Validations =============================================================
 

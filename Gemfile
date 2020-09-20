@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.6'
 
+gem 'aasm', '~> 5.1', '>= 5.1.1' # https://github.com/aasm/aasm
 gem 'action_policy-graphql', '~> 0.3' # https://github.com/palkan/action_policy-graphql
 gem 'bootsnap', '>= 1.4.2', require: false # https://github.com/Shopify/bootsnap
 gem 'clearance', '~> 2.1' # https://github.com/thoughtbot/clearance/

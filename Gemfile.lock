@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (5.1.1)
+      concurrent-ruby (~> 1.0)
     action_policy (0.4.4)
     action_policy-graphql (0.4.0)
       action_policy (>= 0.3.0)
@@ -256,6 +258,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm (~> 5.1, >= 5.1.1)
   action_policy-graphql (~> 0.3)
   annotate
   bootsnap (>= 1.4.2)

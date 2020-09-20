@@ -1,0 +1,9 @@
+fr:
+  models:
+    session:
+      state:
+        submission: Inscription
+        draw: Tirage au sort
+        reading: Lecture en cours
+        conclusion: Compte-rendu
+        archived: Archivé

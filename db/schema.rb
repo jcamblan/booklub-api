@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_20_093116) do
+ActiveRecord::Schema.define(version: 2020_09_20_111500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -75,6 +75,17 @@ ActiveRecord::Schema.define(version: 2020_09_20_093116) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "sessions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "club_id", null: false
+    t.string "state", default: "submission", null: false
+    t.string "name"
+    t.datetime "submission_due_date", null: false
+    t.datetime "read_due_date", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["club_id"], name: "index_sessions_on_club_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -93,4 +104,5 @@ ActiveRecord::Schema.define(version: 2020_09_20_093116) do
   add_foreign_key "oauth_access_grants", "users", column: "resource_owner_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "users", column: "resource_owner_id"
+  add_foreign_key "sessions", "clubs"
 end

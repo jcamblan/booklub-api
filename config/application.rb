@@ -25,15 +25,20 @@ module BooklubApi
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
-
+    # I18n locales
+    Rails.application.routes.default_url_options[:host] = ENV['BASE_DOMAIN']
+    config.i18n.load_path += Dir[
+      Rails.root.join('config/locales/**/*.{rb,yml}')
+    ]
+    config.eager_load_paths << Rails.root.join('lib')
+    config.autoload_paths += Dir[Rails.root.join('lib').to_s,
+                                 Rails.root.join('app/models/concerns').to_s]
+    I18n.enforce_available_locales = false
+    I18n.config.available_locales  = :fr
+    config.i18n.default_locale     = :fr
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
-
-    # Only loads a smaller set of middleware suitable for API only apps.
-    # Middleware like session, flash, cookies can be added back manually.
-    # Skip views, helpers and assets when generating a new resource.
-    config.api_only = true
   end
 end

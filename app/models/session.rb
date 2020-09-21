@@ -10,6 +10,7 @@ class Session < ApplicationRecord
   # == Relationships ===========================================================
 
   belongs_to :club
+  has_many :submissions, dependent: :destroy
 
   # == Validations =============================================================
 

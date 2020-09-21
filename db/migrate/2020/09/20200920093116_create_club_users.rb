@@ -3,9 +3,9 @@
 class CreateClubUsers < ActiveRecord::Migration[6.0]
   def change
     create_table :club_users, id: :uuid do |t|
-      t.uuid :user_id
-      t.uuid :club_id
-      t.bigint :score
+      t.uuid :user_id, null: false
+      t.uuid :club_id, null: false
+      t.bigint :score, null: false, default: 1
 
       t.timestamps
     end

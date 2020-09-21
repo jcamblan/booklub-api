@@ -21,6 +21,10 @@ class User < ApplicationRecord
            dependent: :delete_all
   # rubocop:enable Rails/InverseOf
 
+  has_many :club_users, dependent: :destroy
+  has_many :clubs, through: :club_users
+  has_many :submissions, dependent: :destroy
+
   # == Validations =============================================================
 
   validates :email, uniqueness: { case_sensitive: false }
@@ -29,6 +33,4 @@ class User < ApplicationRecord
   # == Callbacks ===============================================================
   # == Class Methods ===========================================================
   # == Instance Methods ========================================================
-
-  def refresh_score(club:); end
 end

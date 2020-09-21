@@ -10,6 +10,11 @@ gem 'action_policy-graphql', '~> 0.3' # https://github.com/palkan/action_policy-
 gem 'bootsnap', '>= 1.4.2', require: false # https://github.com/Shopify/bootsnap
 gem 'clearance', '~> 2.1' # https://github.com/thoughtbot/clearance/
 gem 'doorkeeper', '~> 5.4' # https://github.com/doorkeeper-gem/doorkeeper
+gem 'dry-effects', '~> 0.1'
+gem 'dry-initializer', '~> 3.0'
+gem 'dry-rails', '~> 0.1'
+gem 'dry-struct', '~> 1.3'
+gem 'dry-types', '~> 1.4'
 gem 'graphql', '~> 1.10' # https://github.com/rmosolgo/graphql-ruby
 gem 'mutations', '~> 0.9' # https://github.com/cypriss/mutations
 gem 'pg', '>= 0.18', '< 2.0' # https://github.com/ged/ruby-pg

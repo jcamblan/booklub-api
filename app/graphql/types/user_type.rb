@@ -2,7 +2,7 @@
 
 module Types
   class UserType < Types::BaseObject
-    field :id, ID, null: false
+    global_id_field :id
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :email, String, null: false

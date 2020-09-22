@@ -2,6 +2,6 @@
 
 module Types
   class QueryType < Types::BaseObject
-    field :display_user, resolver: Resolvers::DisplayUser
+    field :my_clubs, resolver: Resolvers::MyClubs
   end
 end

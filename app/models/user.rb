@@ -39,6 +39,10 @@ class User < ApplicationRecord
            dependent: :delete_all
   # rubocop:enable Rails/InverseOf
 
+  has_many :managed_clubs, dependent: :destroy,
+                           foreign_key: :manager_id,
+                           class_name: 'Club',
+                           inverse_of: :manager
   has_many :club_users, dependent: :destroy
   has_many :clubs, through: :club_users
   has_many :submissions, dependent: :destroy

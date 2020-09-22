@@ -7,11 +7,12 @@ module Mutations
 
     argument :name, String, required: true
 
-    def resolve(**args)
+    def resolve(name:)
       authorize! Club, to: :create?
 
       with_validation! do
-        club = Club.create!(args, manager: current_user)
+        club = Club.create!(name: name, manager: current_user)
+        current_user.clubs << club
         { club: club, errors: [] }
       end
     end

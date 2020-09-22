@@ -7,9 +7,23 @@ class BooklubApiSchema < GraphQL::Schema
   # Opt in to the new runtime (default in future graphql-ruby versions)
   use GraphQL::Execution::Interpreter
   use GraphQL::Analysis::AST
+  use GraphQL::Execution::Errors
 
   # Add built-in connections for pagination
   use GraphQL::Pagination::Connections
+
+  rescue_from ActionPolicy::Unauthorized do |err|
+    raise GraphQL::ExecutionError.new(
+      # use result.message (backed by i18n) as an error message
+      err.result.message,
+      extensions: {
+        # use GraphQL error extensions to provide more context
+        code: :unauthorized,
+        fullMessages: err.result.reasons.full_messages,
+        details: err.result.reasons.details
+      }
+    )
+  end
 
   # Create UUIDs by joining the type name & ID, then base64-encoding it
   def self.id_from_object(object, type_definition, _query_ctx)

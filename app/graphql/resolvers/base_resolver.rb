@@ -2,6 +2,8 @@
 
 module Resolvers
   class BaseResolver < GraphQL::Schema::Resolver
+    include ActionPolicy::GraphQL::Behaviour
+
     def current_user
       context[:current_user]
     end

@@ -53,3 +53,5 @@ Layout/LineLength:
   IgnoredPatterns: ['(\A|\s)#'] # ignored comment line
 Style/RedundantFetchBlock:
   Enabled: true
+RSpec/MultipleExpectations:
+  Max: 4

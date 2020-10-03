@@ -21,6 +21,7 @@ module Requests
       }, headers: {
         Authorization: "Bearer #{token&.token}"
       }
+      puts json
     end
 
     # by default, variables is empty indeed
@@ -32,7 +33,10 @@ module Requests
     # so I can use shared_examples for some common test cases
     RSpec.shared_examples 'unauthorized user' do
       it 'return unauthorized error message' do
-        expect(errors.pluck('key')).to include('unauthorized')
+        do_graphql_request
+
+        expect(json.dig('errors').map { |e| e.dig('extensions', 'code') })
+          .to include('unauthorized')
       end
     end
 
@@ -46,13 +50,6 @@ module Requests
     #
     # field :object, Types::ObjectType, null: true
     # field :errors, [Types::MutationErrorType], null: true
-    #
-    # and MutationErrorType is defined as follows
-    #
-    # class Types::MutationErrorType < Types::BaseObject
-    #   field :key, String, null: true
-    #   field :message, String, null: true
-    # end
     def mutation_errors
       json.dig('data', described_class.graphql_name.camelize(:lower), 'errors')
     end

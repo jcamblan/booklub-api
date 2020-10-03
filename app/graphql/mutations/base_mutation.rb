@@ -21,6 +21,8 @@ module Mutations
         yield
       rescue ActiveRecord::RecordInvalid => e
         validation_error validation_error_data(e.record.errors, path: path)
+      rescue ActiveRecord::RecordNotFound => e
+        validation_error [{ error: 'RecordNotFound', message: e.message, path: [] }]
       end
     end
 

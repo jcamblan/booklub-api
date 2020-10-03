@@ -18,7 +18,7 @@ class BooklubApiSchema < GraphQL::Schema
       err.result.message,
       extensions: {
         # use GraphQL error extensions to provide more context
-        code: :unauthorized,
+        code: 'Unauthorized',
         fullMessages: err.result.reasons.full_messages,
         details: err.result.reasons.details
       }

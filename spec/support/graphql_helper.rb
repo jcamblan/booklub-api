@@ -36,7 +36,7 @@ module Requests
         do_graphql_request
 
         expect(json.dig('errors').map { |e| e.dig('extensions', 'code') })
-          .to include('unauthorized')
+          .to include('Unauthorized')
       end
     end
 

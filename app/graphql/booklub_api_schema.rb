@@ -35,4 +35,10 @@ class BooklubApiSchema < GraphQL::Schema
     type_name, item_id = GraphQL::Schema::UniqueWithinType.decode(id)
     type_name.constantize.find item_id
   end
+
+  def self.resolve_type(_type, obj, _ctx)
+    "Types::#{obj.class.name}Type".constantize
+  rescue NameError => e
+    raise "#{e.name} is not a valid type"
+  end
 end

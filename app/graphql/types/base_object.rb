@@ -6,6 +6,7 @@ module Types
     ActionPolicy::GraphQL.authorize_raise_exception = false
 
     include ConnectionsHelper
+    implements GraphQL::Types::Relay::Node
 
     field_class Types::BaseField
 

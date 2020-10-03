@@ -9,7 +9,11 @@ class ClubPolicy < ApplicationPolicy
     authenticated? && !record.users.include?(user)
   end
 
-  alias_rule :create?, to: :authenticated?
+  def club_member?
+    authenticated? && record.users.include?(user)
+  end
 
+  alias_rule :create?, to: :authenticated?
   alias_rule :reset_invitation_code?, :invitation_code?, to: :club_manager?
+  alias_rule :users, :show?, to: :club_member?
 end

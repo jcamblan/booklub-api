@@ -24,11 +24,22 @@ RSpec.describe Mutations::ResetClubInvitationCode, type: :request do # rubocop:d
   context 'when current_user is not the club_manager' do
     let(:current_user) { Fabricate(:user) }
 
+    before { club.users << current_user }
+
     it_behaves_like 'unauthorized user'
 
     it 'does not change the invitation code' do
       do_graphql_request
       expect(club.reload.invitation_code).to eq(initial_code)
+    end
+  end
+
+  context 'when current_iser is not club member' do
+    let(:current_user) { Fabricate(:user) }
+
+    it 'returns nil' do
+      do_graphql_request
+      expect(json.dig('data', 'resetClubInvitationCode')).to be nil
     end
   end
 

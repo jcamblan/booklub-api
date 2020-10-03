@@ -1,0 +1,46 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "1c64e3e0ad88bec3369f0e5d22029fd57743b327f0c8eaf7a9c94177f4574a36",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "lib/connections_helper.rb",
+      "line": 16,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "res.order(\"#{res.model.table_name}.#{(args[:order] or { :by => :id, :direction => :desc })[:by]} #{(args[:order] or { :by => :id, :direction => :desc })[:direction]}\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "ConnectionsHelper",
+        "method": "order"
+      },
+      "user_input": "(args[:order] or { :by => :id, :direction => :desc })[:by]",
+      "confidence": "Weak",
+      "note": ""
+    },
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "fd15be72a76a5354564e49ed0c48854dbd37b2c2de4b4ddc720c4cbf1f5ca8fd",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "lib/connections_helper.rb",
+      "line": 55,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "res.where(\"#{filter_key} ILIKE ?\", \"%#{value}%\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "ConnectionsHelper",
+        "method": "apply_where"
+      },
+      "user_input": "filter_key",
+      "confidence": "Weak",
+      "note": ""
+    }
+  ],
+  "updated": "2020-10-03 16:57:40 +0200",
+  "brakeman_version": "4.9.1"
+}

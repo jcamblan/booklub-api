@@ -4,15 +4,17 @@
 #
 # Table name: clubs
 #
-#  id         :uuid             not null, primary key
-#  name       :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  manager_id :uuid
+#  id              :uuid             not null, primary key
+#  invitation_code :string           not null
+#  name            :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  manager_id      :uuid
 #
 # Indexes
 #
-#  index_clubs_on_name  (name)
+#  index_clubs_on_invitation_code  (invitation_code) UNIQUE
+#  index_clubs_on_name             (name)
 #
 # Foreign Keys
 #

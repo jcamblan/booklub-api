@@ -12,7 +12,6 @@ module Mutations
 
       with_validation! do
         club = Club.create!(name: name, manager: current_user)
-        current_user.clubs << club
         { club: club, errors: [] }
       end
     end

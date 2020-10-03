@@ -2,15 +2,18 @@
 
 module Mutations
   class JoinClub < BaseMutation
-    field :user, Types::UserType, null: true
+    field :club, Types::ClubType, null: true
     field :errors, [Types::ValidationErrorType], null: false
 
-    argument :club_id, ID, required: true, loads: Types::ClubType
+    argument :invitation_code, String, required: true
 
-    def resolve(club:)
+    def resolve(invitation_code:)
       with_validation! do
+        club = Club.find_by!(invitation_code: invitation_code)
+        authorize! club, to: :join?
+
         current_user.clubs << club
-        { user: current_user, errors: [] }
+        { club: club, errors: [] }
       end
     end
   end

@@ -1,5 +1,15 @@
 # frozen_string_literal: true
 
 class ClubPolicy < ApplicationPolicy
+  def club_manager?
+    record.manager == user
+  end
+
+  def join?
+    authenticated? && !record.users.include?(user)
+  end
+
   alias_rule :create?, to: :authenticated?
+
+  alias_rule :reset_invitation_code?, :invitation_code?, to: :club_manager?
 end

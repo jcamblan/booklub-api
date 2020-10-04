@@ -5,5 +5,12 @@ class UserPolicy < ApplicationPolicy
     authenticated? && record == user
   end
 
-  alias_rule :email?, :show?, to: :me?
+  def show?
+    return false unless authenticated?
+    return true if record == user
+
+    User.joins(:clubs).where(clubs: { id: user.club_ids }).distinct.include?(record)
+  end
+
+  alias_rule :email?, to: :me?
 end

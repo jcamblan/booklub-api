@@ -7,5 +7,6 @@ module Types
     field :create_club, mutation: Mutations::CreateClub
     field :join_club, mutation: Mutations::JoinClub
     field :register, mutation: Mutations::Register
+    field :create_session, mutation: Mutations::CreateSession
   end
 end

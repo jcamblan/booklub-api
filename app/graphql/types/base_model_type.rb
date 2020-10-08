@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Types
   class BaseModelType < Types::BaseObject
     def self.authorized?(object, context)

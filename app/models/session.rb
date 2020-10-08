@@ -33,6 +33,7 @@ class Session < ApplicationRecord
   # == Relationships ===========================================================
 
   belongs_to :club
+  belongs_to :selected_book, optional: true, class_name: 'Book'
   has_many :submissions, dependent: :destroy
 
   # == Validations =============================================================
@@ -78,4 +79,10 @@ class Session < ApplicationRecord
 
   # == Class Methods ===========================================================
   # == Instance Methods ========================================================
+
+  def selected_book_submitters
+    return if %w[submission draw].include?(state)
+
+    User.joins(:submissions).where(submissions: { session: self, book: selected_book })
+  end
 end

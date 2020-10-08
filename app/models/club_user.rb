@@ -4,12 +4,14 @@
 #
 # Table name: club_users
 #
-#  id         :uuid             not null, primary key
-#  score      :bigint           default(1), not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  club_id    :uuid             not null
-#  user_id    :uuid             not null
+#  id              :uuid             not null, primary key
+#  bonus_score     :integer          default(0), not null
+#  selection_count :integer          default(0), not null
+#  session_count   :integer          default(0), not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  club_id         :uuid             not null
+#  user_id         :uuid             not null
 #
 # Indexes
 #

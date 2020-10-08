@@ -28,6 +28,6 @@ class SessionDrawJob < ApplicationJob
   def refresh_users_scores_from(session)
     ClubUser.joins(user: :submissions)
             .where(submissions: { session: session })
-            .find_each(&:refresh_score)
+            .find_each(&:refresh_stats)
   end
 end

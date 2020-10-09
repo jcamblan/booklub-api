@@ -10,5 +10,10 @@ module Types
     field :users, Types::Connections::ClubUserConnection, null: true, authorize_field: true
     field :manager, UserType, null: true
     field :sessions, SessionType.connection_type, null: true
+    field :current_session, Types::SessionType, null: true
+
+    def current_session
+      object.sessions.find_by(state: %w[submission draw reading conclusion])
+    end
   end
 end

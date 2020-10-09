@@ -43,7 +43,7 @@ class ClubUser < ApplicationRecord
   # == Instance Methods ========================================================
 
   def submissions
-    user.submissions.join(:session).where(sessions: { club: club })
+    user.submissions.joins(:session).where(sessions: { club: club })
   end
 
   # bonus_score is a bad luck protection
@@ -54,7 +54,7 @@ class ClubUser < ApplicationRecord
 
     submissions.where(
       sessions: { state: %w[reading conclusion archived] }
-    ).find_each do |submission|
+    ).order(created_at: :asc).each do |submission|
       score += 1
       next unless submission.book_id == submission.session.selected_book_id
 
@@ -66,7 +66,7 @@ class ClubUser < ApplicationRecord
 
   # how many sessions did the user participated in?
   def calculate_session_count
-    user.submissions.join(:session).where(sessions: { club: club }).count
+    user.submissions.joins(:session).where(sessions: { club: club }).count
   end
 
   # how many times did the user submissions were selected?

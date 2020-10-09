@@ -46,6 +46,7 @@ class User < ApplicationRecord
   has_many :club_users, dependent: :destroy
   has_many :clubs, through: :club_users
   has_many :submissions, dependent: :destroy
+  has_many :notes, dependent: :destroy
 
   # == Validations =============================================================
 

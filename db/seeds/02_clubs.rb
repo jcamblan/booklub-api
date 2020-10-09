@@ -36,6 +36,11 @@ session.submissions
        .find_or_create_by(user: mbela)
 session.update(selected_book: Book.find_by(title: 'Le dahlia noir'), state: 'archived')
 
+session.submissions.find_each do |submission|
+  session.notes.create_with(value: Note::VALID_NOTES.sample)
+         .find_or_create_by(user: submission.user, book: session.selected_book)
+end
+
 session = club.sessions.create_with(
   submission_due_date: 5.months.ago,
   read_due_date: 4.months.ago
@@ -56,6 +61,11 @@ session.submissions
        .create_with(book: Book.find_by(title: 'Le monde selon Garp'))
        .find_or_create_by(user: mbela)
 session.update(selected_book: Book.find_by(title: 'Le portrait de Dorian Gray'), state: 'archived')
+
+session.submissions.find_each do |submission|
+  session.notes.create_with(value: Note::VALID_NOTES.sample)
+         .find_or_create_by(user: submission.user, book: session.selected_book)
+end
 
 session = club.sessions.create_with(
   submission_due_date: 3.months.ago,
@@ -78,6 +88,11 @@ session.submissions
        .create_with(book: Book.find_or_create_by(title: 'La Conjuration des imbéciles', author: 'John Kennedy Toole'))
        .find_or_create_by(user: mbela)
 session.update(selected_book: Book.find_by(title: 'Le vol des cygognes'), state: 'archived')
+
+session.submissions.find_each do |submission|
+  session.notes.create_with(value: Note::VALID_NOTES.sample)
+         .find_or_create_by(user: submission.user, book: session.selected_book)
+end
 
 ClubUser.find_each(&:refresh_stats)
 

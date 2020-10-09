@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_07_200844) do
+ActiveRecord::Schema.define(version: 2020_10_09_215851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -44,6 +44,18 @@ ActiveRecord::Schema.define(version: 2020_10_07_200844) do
     t.string "invitation_code", null: false
     t.index ["invitation_code"], name: "index_clubs_on_invitation_code", unique: true
     t.index ["name"], name: "index_clubs_on_name"
+  end
+
+  create_table "notes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "session_id", null: false
+    t.uuid "book_id", null: false
+    t.uuid "user_id", null: false
+    t.integer "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_notes_on_book_id"
+    t.index ["session_id"], name: "index_notes_on_session_id"
+    t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
   create_table "oauth_access_grants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -125,6 +137,9 @@ ActiveRecord::Schema.define(version: 2020_10_07_200844) do
   add_foreign_key "club_users", "clubs"
   add_foreign_key "club_users", "users"
   add_foreign_key "clubs", "users", column: "manager_id"
+  add_foreign_key "notes", "books"
+  add_foreign_key "notes", "sessions"
+  add_foreign_key "notes", "users"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_grants", "users", column: "resource_owner_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"

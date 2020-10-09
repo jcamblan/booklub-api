@@ -13,5 +13,6 @@ module Types
     field :selected_book, Types::BookType, null: true
     field :selected_book_submitters, UserType.connection_type, null: true
     field :submissions, Types::Connections::SubmissionsConnection, null: true
+    field :notes, Types::NoteType.connection_type, null: true
   end
 end

@@ -3,7 +3,7 @@
 class Types::Edges::ClubUserEdgeType < GraphQL::Types::Relay::BaseEdge
   node_type(Types::UserType)
 
-  field :sessionCount, Int, null: true
-  field :selectionCount, Int, null: true
-  field :bonusScore, Int, null: true
+  field :session_count, Int, null: true
+  field :selection_count, Int, null: true
+  field :bonus_score, Int, null: true
 end

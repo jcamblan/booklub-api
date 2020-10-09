@@ -51,6 +51,8 @@ Style/SlicingWithRange:
 Layout/LineLength:
   Max: 100
   IgnoredPatterns: ['(\A|\s)#'] # ignored comment line
+  Exclude:
+    - "db/seeds/**/*"
 Style/RedundantFetchBlock:
   Enabled: true
 RSpec/MultipleExpectations:

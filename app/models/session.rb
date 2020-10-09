@@ -35,6 +35,7 @@ class Session < ApplicationRecord
   belongs_to :club
   belongs_to :selected_book, optional: true, class_name: 'Book'
   has_many :submissions, dependent: :destroy
+  has_many :notes, dependent: :destroy
 
   # == Validations =============================================================
 

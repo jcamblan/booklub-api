@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddStatsToBooks < ActiveRecord::Migration[6.0]
   disable_ddl_transaction!
 
@@ -7,7 +9,7 @@ class AddStatsToBooks < ActiveRecord::Migration[6.0]
         t.integer :submission_count, null: false, default: 0
         t.integer :selection_count, null: false, default: 0
         t.integer :note_count, null: false, default: 0
-        t.float :average_note, null: true
+        t.float :average_note, null: false, default: 0
       end
     end
 

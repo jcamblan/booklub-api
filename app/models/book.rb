@@ -6,7 +6,7 @@
 #
 #  id               :uuid             not null, primary key
 #  author           :string           not null
-#  average_note     :float
+#  average_note     :float            default(0.0), not null
 #  note_count       :integer          default(0), not null
 #  selection_count  :integer          default(0), not null
 #  submission_count :integer          default(0), not null
@@ -34,6 +34,15 @@ class Book < ApplicationRecord
   validates :author, presence: true
 
   # == Scopes ==================================================================
+
+  scope :search, lambda { |search|
+                   where(
+                     'books.title ILIKE ? OR books.author ILIKE ?',
+                     "%#{search}%",
+                     "%#{search}%"
+                   )
+                 }
+
   # == Callbacks ===============================================================
   # == Class Methods ===========================================================
   # == Instance Methods ========================================================

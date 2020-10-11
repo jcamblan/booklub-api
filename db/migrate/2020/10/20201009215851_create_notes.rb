@@ -20,5 +20,7 @@ class CreateNotes < ActiveRecord::Migration[6.0]
     add_index :notes, :book_id
     add_index :notes, :session_id
     add_index :notes, :user_id
+
+    add_index :notes, %i[book_id session_id user_id], unique: true
   end
 end

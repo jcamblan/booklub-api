@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Types::Connections::BaseConnection < GraphQL::Types::Relay::BaseConnection
+class Connections::BaseConnection < GraphQL::Types::Relay::BaseConnection
   field :total_count, Integer, null: false, description: "Connection's nodes count"
 
   def total_count

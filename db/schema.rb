@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2020_10_11_090251) do
     t.integer "submission_count", default: 0, null: false
     t.integer "selection_count", default: 0, null: false
     t.integer "note_count", default: 0, null: false
-    t.float "average_note"
+    t.float "average_note", default: 0.0, null: false
     t.index ["average_note"], name: "index_books_on_average_note"
     t.index ["selection_count"], name: "index_books_on_selection_count"
     t.index ["submission_count"], name: "index_books_on_submission_count"

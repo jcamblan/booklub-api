@@ -6,7 +6,7 @@
 #
 #  id               :uuid             not null, primary key
 #  author           :string           not null
-#  average_note     :float
+#  average_note     :float            default(0.0), not null
 #  note_count       :integer          default(0), not null
 #  selection_count  :integer          default(0), not null
 #  submission_count :integer          default(0), not null

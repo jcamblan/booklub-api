@@ -7,7 +7,7 @@ module Types
     field :invitation_code, String, null: true, authorize_field: true
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
-    field :users, Types::Connections::ClubUserConnection, null: true, authorize_field: true
+    field :users, Connections::ClubUserConnection, null: true, authorize_field: true
     field :manager, UserType, null: true
     field :sessions, SessionType.connection_type, null: true
     field :current_session, Types::SessionType, null: true

@@ -14,9 +14,10 @@
 #
 # Indexes
 #
-#  index_notes_on_book_id     (book_id)
-#  index_notes_on_session_id  (session_id)
-#  index_notes_on_user_id     (user_id)
+#  index_notes_on_book_id                             (book_id)
+#  index_notes_on_book_id_and_session_id_and_user_id  (book_id,session_id,user_id) UNIQUE
+#  index_notes_on_session_id                          (session_id)
+#  index_notes_on_user_id                             (user_id)
 #
 # Foreign Keys
 #

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_09_215851) do
+ActiveRecord::Schema.define(version: 2020_10_11_090251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -21,6 +21,13 @@ ActiveRecord::Schema.define(version: 2020_10_09_215851) do
     t.string "author", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "submission_count", default: 0, null: false
+    t.integer "selection_count", default: 0, null: false
+    t.integer "note_count", default: 0, null: false
+    t.float "average_note"
+    t.index ["average_note"], name: "index_books_on_average_note"
+    t.index ["selection_count"], name: "index_books_on_selection_count"
+    t.index ["submission_count"], name: "index_books_on_submission_count"
   end
 
   create_table "club_users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -53,6 +60,7 @@ ActiveRecord::Schema.define(version: 2020_10_09_215851) do
     t.integer "value"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id", "session_id", "user_id"], name: "index_notes_on_book_id_and_session_id_and_user_id", unique: true
     t.index ["book_id"], name: "index_notes_on_book_id"
     t.index ["session_id"], name: "index_notes_on_session_id"
     t.index ["user_id"], name: "index_notes_on_user_id"

@@ -14,9 +14,10 @@
 #
 # Indexes
 #
-#  index_notes_on_book_id     (book_id)
-#  index_notes_on_session_id  (session_id)
-#  index_notes_on_user_id     (user_id)
+#  index_notes_on_book_id                             (book_id)
+#  index_notes_on_book_id_and_session_id_and_user_id  (book_id,session_id,user_id) UNIQUE
+#  index_notes_on_session_id                          (session_id)
+#  index_notes_on_user_id                             (user_id)
 #
 # Foreign Keys
 #
@@ -38,8 +39,20 @@ class Note < ApplicationRecord
   belongs_to :user
 
   # == Validations =============================================================
+
+  validates :book_id, uniqueness: { scope: %w[session_id user_id] }
+
   # == Scopes ==================================================================
   # == Callbacks ===============================================================
+
+  counter_culture :book, column_name: 'note_count'
+
+  after_commit :update_book_average_note
+
   # == Class Methods ===========================================================
   # == Instance Methods ========================================================
+
+  def update_book_average_note
+    book.update(average_note: book.notes.average(:value))
+  end
 end

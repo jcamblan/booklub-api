@@ -9,7 +9,7 @@ module Resolvers
 
     def resolve(**args)
       authorize! Book, to: :index?
-      connection_with_arguments(Book.all, args)
+      connection_with_arguments(Book.all, args).distinct
     end
   end
 end

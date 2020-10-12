@@ -16,7 +16,7 @@ class SessionDrawJob < ApplicationJob
 
     # user score increase his books chances to be selected
     session.submissions.each do |submission|
-      score = ClubUser.find_by(club: session.club, user: submission.user).score
+      score = ClubUser.find_by(club: session.club, user: submission.user).bonusScore
       score.times do
         pool << submission.book_id
       end

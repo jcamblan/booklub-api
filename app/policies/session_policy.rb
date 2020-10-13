@@ -6,4 +6,6 @@ class SessionPolicy < ApplicationPolicy
 
     user.clubs.include?(record.club)
   end
+
+  alias_rule :create?, :participate?, to: :show?
 end

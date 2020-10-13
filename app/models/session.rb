@@ -41,8 +41,12 @@ class Session < ApplicationRecord
 
   validates :submission_due_date, presence: true
   validates :read_due_date, presence: true
+  validate :one_session_at_a_time, on: :create
 
   # == Scopes ==================================================================
+
+  scope :active, -> { where(state: %w[submission draw reading]) }
+
   # == Callbacks ===============================================================
   # == State Machine ===========================================================
 
@@ -85,5 +89,11 @@ class Session < ApplicationRecord
     return if %w[submission draw].include?(state)
 
     User.joins(:submissions).where(submissions: { session: self, book: selected_book })
+  end
+
+  def one_session_at_a_time
+    return if club.sessions.active.count.zero?
+
+    errors.add(:state, :one_session_at_a_time, message: 'Il y a déjà une session en cours')
   end
 end

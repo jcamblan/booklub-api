@@ -34,9 +34,12 @@ class Submission < ApplicationRecord
   belongs_to :user
   belongs_to :book
 
+  accepts_nested_attributes_for :book
+
   # == Validations =============================================================
 
   validates :user_id, uniqueness: { scope: :session_id }
+  validates :book_id, presence: true
 
   # == Scopes ==================================================================
   # == Callbacks ===============================================================

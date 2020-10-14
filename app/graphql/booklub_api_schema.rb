@@ -12,6 +12,8 @@ class BooklubApiSchema < GraphQL::Schema
   # Add built-in connections for pagination
   use GraphQL::Pagination::Connections
 
+  default_max_page_size 20
+
   rescue_from ActionPolicy::Unauthorized do |err|
     raise GraphQL::ExecutionError.new(
       # use result.message (backed by i18n) as an error message

@@ -18,14 +18,14 @@ module Mutations
       authorize! session, to: :participate?
 
       with_validation! do
-        submission = session.submissions.new(user: current_user)
-
         ActiveRecord::Base.transaction do
+          submission = session.submissions.new(user: current_user)
+
           submission.book = book || Book.find_or_create_by(book_attributes.to_h)
           submission.save!
-        end
 
-        { submission: submission, errors: [] }
+          { submission: submission, errors: [] }
+        end
       end
     end
   end

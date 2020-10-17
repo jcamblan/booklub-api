@@ -13,7 +13,7 @@ module Types
     field :current_session, Types::SessionType, null: true
 
     def current_session
-      object.sessions.find_by(state: %w[submission draw reading conclusion])
+      object.sessions.order(created_at: :desc).find_by(state: %w[submission draw reading conclusion])
     end
   end
 end

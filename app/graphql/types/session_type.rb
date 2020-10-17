@@ -14,5 +14,7 @@ module Types
     field :selected_book_submitters, UserType.connection_type, null: true
     field :submissions, Connections::SubmissionsConnection, null: true
     field :notes, Types::NoteType.connection_type, null: true
+
+    expose_authorization_rules :participate?
   end
 end

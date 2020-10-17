@@ -6,6 +6,7 @@ class SessionDrawJob < ApplicationJob
   def perform(session)
     elected_book_id = draw_book_from(session)
     session.update(selected_book_id: elected_book_id)
+    session.start_reading!
     refresh_users_scores_from(session)
   end
 
@@ -16,7 +17,10 @@ class SessionDrawJob < ApplicationJob
 
     # user score increase his books chances to be selected
     session.submissions.each do |submission|
-      score = ClubUser.find_by(club: session.club, user: submission.user).bonusScore
+      score = ClubUser.find_by(
+        club: session.club, user: submission.user
+      )&.bonus_score || 0
+
       score.times do
         pool << submission.book_id
       end
@@ -27,7 +31,7 @@ class SessionDrawJob < ApplicationJob
 
   def refresh_users_scores_from(session)
     ClubUser.joins(user: :submissions)
-            .where(submissions: { session: session })
+            .where(submissions: { session_id: session.id })
             .find_each(&:refresh_stats)
   end
 end

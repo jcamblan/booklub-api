@@ -48,6 +48,9 @@ class Session < ApplicationRecord
   scope :active, -> { where(state: %w[submission draw reading]) }
 
   # == Callbacks ===============================================================
+
+  after_create :apply_default_name
+
   # == State Machine ===========================================================
 
   aasm column: 'state' do
@@ -95,5 +98,12 @@ class Session < ApplicationRecord
     return if club.sessions.active.count.zero?
 
     errors.add(:state, :one_session_at_a_time, message: 'Il y a déjà une session en cours')
+  end
+
+  def apply_default_name
+    return if name.present?
+
+    index = club.sessions.order(created_at: :asc).find_index(self)
+    update(name: "Session ##{index + 1}")
   end
 end

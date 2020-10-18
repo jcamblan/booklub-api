@@ -50,6 +50,7 @@ class Session < ApplicationRecord
   # == Callbacks ===============================================================
 
   after_create :apply_default_name
+  after_create :archive_previous_session
 
   # == State Machine ===========================================================
 
@@ -88,6 +89,10 @@ class Session < ApplicationRecord
   # == Class Methods ===========================================================
   # == Instance Methods ========================================================
 
+  def active?
+    %w[submission draw reading].include?
+  end
+
   def selected_book_submitters
     return if %w[submission draw].include?(state)
 
@@ -105,5 +110,9 @@ class Session < ApplicationRecord
 
     index = club.sessions.order(created_at: :asc).find_index(self)
     update(name: "Session ##{index + 1}")
+  end
+
+  def archive_previous_session
+    club.sessions.where(state: :conclusion).find_each(&:archive!)
   end
 end

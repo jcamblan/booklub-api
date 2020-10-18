@@ -12,8 +12,11 @@ module Types
     field :sessions, SessionType.connection_type, null: true
     field :current_session, Types::SessionType, null: true
 
+    expose_authorization_rules :create_session?
+
     def current_session
-      object.sessions.order(created_at: :desc).find_by(state: %w[submission draw reading conclusion])
+      object.sessions.order(created_at: :desc)
+            .find_by(state: %w[submission draw reading conclusion])
     end
   end
 end

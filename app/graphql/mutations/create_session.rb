@@ -11,11 +11,10 @@ module Mutations
     argument :name, String, required: false
 
     def resolve(**args)
-      session = Session.new(args)
-      authorize! session, to: :create?
+      authorize! args[:club], to: :create_session?
 
       with_validation! do
-        session.save!
+        session = Session.create!(args)
         { session: session, errors: [] }
       end
     end

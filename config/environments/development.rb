@@ -52,6 +52,6 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.hosts << 'julien.local'
-  config.hosts << '68563c599a12.ngrok.io'
+  config.hosts << '39cdd8824c70.ngrok.io'
   config.hosts << ENV['API_BASE_URL']
 end

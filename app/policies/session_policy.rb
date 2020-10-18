@@ -8,8 +8,11 @@ class SessionPolicy < ApplicationPolicy
   end
 
   def participate?
-    club_member? && record.submissions.find_by(user: user).nil?
+    return false unless club_member?
+    return false unless record.submission?
+
+    record.submissions.where(user: user).empty?
   end
 
-  alias_rule :show?, :create?, to: :club_member?
+  alias_rule :show?, to: :club_member?
 end

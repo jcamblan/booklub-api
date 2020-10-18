@@ -6,11 +6,15 @@ class ClubPolicy < ApplicationPolicy
   end
 
   def join?
-    authenticated? && !record.users.include?(user)
+    authenticated? && record.users.exclude?(user)
   end
 
   def club_member?
     authenticated? && record.users.include?(user)
+  end
+
+  def create_session?
+    club_member? && record.sessions.active.empty?
   end
 
   alias_rule :create?, :list_mine?, to: :authenticated?

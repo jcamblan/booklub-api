@@ -53,7 +53,7 @@ class Club < ApplicationRecord
 
     while invitation_code.blank?
       # Generate a 8 digits string as code
-      code = format('%06d', rand(10**8)) # rubocop:disable Style/FormatStringToken
+      code = format('%06d', rand(10**8))
       # Each code must be unique
       next if codes.include?(code)
 

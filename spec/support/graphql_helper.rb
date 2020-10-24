@@ -35,7 +35,7 @@ module Requests
       it 'return unauthorized error message' do
         do_graphql_request
 
-        expect(json.dig('errors').map { |e| e.dig('extensions', 'code') })
+        expect(json['errors'].map { |e| e.dig('extensions', 'code') })
           .to include('Unauthorized')
       end
     end

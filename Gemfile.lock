@@ -356,7 +356,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 6.0.3, >= 6.0.3.2)
   rspec-rails
-  rubocop
+  rubocop (< 1.0.0)
   rubocop-rails
   rubocop-rspec
   sidekiq (~> 6.1)

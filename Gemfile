@@ -34,7 +34,7 @@ group :development, :test do
   gem 'pry-clipboard' # https://github.com/hotchpotch/pry-clipboard
   gem 'pry-rails' # https://github.com/rweng/pry-rails
   gem 'rspec-rails' # https://github.com/rspec/rspec-rails
-  gem 'rubocop' # https://github.com/rubocop-hq/rubocop
+  gem 'rubocop', '< 1.0.0' # https://github.com/rubocop-hq/rubocop
   gem 'rubocop-rails' # https://github.com/rubocop-hq/rubocop-rails
   gem 'rubocop-rspec' # https://github.com/rubocop-hq/rubocop-rspec
 end

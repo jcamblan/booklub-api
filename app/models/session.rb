@@ -25,6 +25,9 @@
 #
 class Session < ApplicationRecord
   # == Constants ===============================================================
+
+  STATES = %w[submission draw reading conclusion archived].freeze
+
   # == Attributes ==============================================================
   # == Extensions ==============================================================
 
@@ -36,6 +39,8 @@ class Session < ApplicationRecord
   belongs_to :selected_book, optional: true, class_name: 'Book'
   has_many :submissions, dependent: :destroy
   has_many :notes, dependent: :destroy
+
+  has_many :users, through: :submissions, source: :user
 
   # == Validations =============================================================
 
@@ -114,5 +119,13 @@ class Session < ApplicationRecord
 
   def archive_previous_session
     club.sessions.where(state: :conclusion).find_each(&:archive!)
+  end
+
+  def state_precedes?(state_comparison)
+    STATES.find_index(state) < STATES.find_index(state_comparison.to_s)
+  end
+
+  def state_follows?(state_comparison)
+    STATES.find_index(state) > STATES.find_index(state_comparison.to_s)
   end
 end

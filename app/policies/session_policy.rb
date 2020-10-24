@@ -14,5 +14,12 @@ class SessionPolicy < ApplicationPolicy
     record.submissions.where(user: user).empty?
   end
 
+  def note?
+    return false if record.state_precedes?(:reading)
+    return false if record.selected_book_id.nil?
+
+    record.users.include?(user)
+  end
+
   alias_rule :show?, to: :club_member?
 end

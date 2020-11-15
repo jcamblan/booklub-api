@@ -1,5 +1,5 @@
 module Types
-  class AuthorType < Types::BaseObject
+  class AuthorType < Types::BaseModelType
     global_id_field :id
     field :name, String, null: true
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false

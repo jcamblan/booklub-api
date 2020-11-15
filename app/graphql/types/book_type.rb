@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Types
-  class BookType < Types::BaseObject
+  class BookType < Types::BaseModelType
     # == Order =================================================================
 
     class Types::BookOrderBy < ::Types::BaseEnum

@@ -6,10 +6,6 @@ module Types
 
     field :my_clubs, resolver: Resolvers::MyClubs
     field :books, resolver: Resolvers::Books
-    field :me, UserType, null: true
-
-    def me
-      current_user
-    end
+    field :me, resolver: Resolvers::Me
   end
 end

@@ -15,9 +15,9 @@ module Mutations
     argument :book_attributes, Types::BookAttributes, required: true
 
     def resolve(session:, book_attributes:) # rubocop:disable Metrics/MethodLength
-      authorize! session, to: :participate?
-
       with_validation! do
+        authorize! session, to: :participate?
+
         book = Book.find_or_initialize_by(google_book_id: book_attributes[:google_book_id])
         book.assign_attributes(
           title: book_attributes[:title],
@@ -26,9 +26,8 @@ module Mutations
           end
         )
 
-        submission = session.submissions.new(user: current_user)
+        submission = session.submissions.new(user: current_user, book: book)
 
-        submission.book = book
         submission.save!
 
         { submission: submission, errors: [] }

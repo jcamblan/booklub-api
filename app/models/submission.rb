@@ -39,7 +39,6 @@ class Submission < ApplicationRecord
   # == Validations =============================================================
 
   validates :user_id, uniqueness: { scope: :session_id }
-  validates :book_id, presence: true
 
   # == Scopes ==================================================================
   # == Callbacks ===============================================================

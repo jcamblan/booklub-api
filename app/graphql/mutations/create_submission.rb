@@ -7,25 +7,31 @@ module Mutations
 
     class Types::BookAttributes < Types::BaseInputObject
       argument :title, String, required: true
-      argument :author, String, required: true
+      argument :authors, [String], required: true
+      argument :google_book_id, String, required: true
     end
 
     argument :session_id, ID, required: true, loads: Types::SessionType
-    argument :book_id, ID, required: false, loads: Types::BookType
-    argument :book_attributes, Types::BookAttributes, required: false
+    argument :book_attributes, Types::BookAttributes, required: true
 
-    def resolve(session:, book: nil, book_attributes: {})
+    def resolve(session:, book_attributes:) # rubocop:disable Metrics/MethodLength
       authorize! session, to: :participate?
 
       with_validation! do
-        ActiveRecord::Base.transaction do
-          submission = session.submissions.new(user: current_user)
+        book = Book.find_or_initialize_by(google_book_id: book_attributes[:google_book_id])
+        book.assign_attributes(
+          title: book_attributes[:title],
+          authors: book_attributes[:authors].map do |name|
+            Author.find_or_initialize_by(name: name)
+          end
+        )
 
-          submission.book = book || Book.find_or_create_by(book_attributes.to_h)
-          submission.save!
+        submission = session.submissions.new(user: current_user)
 
-          { submission: submission, errors: [] }
-        end
+        submission.book = book
+        submission.save!
+
+        { submission: submission, errors: [] }
       end
     end
   end

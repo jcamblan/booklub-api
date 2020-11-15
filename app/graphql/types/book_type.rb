@@ -6,7 +6,6 @@ module Types
 
     class Types::BookOrderBy < ::Types::BaseEnum
       value :title
-      value :author
       value :average_note
       value :submission_count
       value :note_count
@@ -22,11 +21,13 @@ module Types
 
     global_id_field :id
     field :title, String, null: false
-    field :author, String, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :submission_count, Integer, null: false
     field :note_count, Integer, null: false
     field :average_note, Float, null: true
+    field :google_book_id, String, null: true
+
+    field :authors, AuthorType.connection_type, null: false
   end
 end

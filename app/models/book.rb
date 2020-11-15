@@ -38,10 +38,7 @@ class Book < ApplicationRecord
 
   scope :search, lambda { |search|
                    joins(:authors).where(
-                     'books.title ILIKE ?
-                     OR books.author ILIKE ?
-                     OR authors.name ILIKE ?',
-                     "%#{search}%",
+                     'books.title ILIKE ? OR authors.name ILIKE ?',
                      "%#{search}%",
                      "%#{search}%"
                    )

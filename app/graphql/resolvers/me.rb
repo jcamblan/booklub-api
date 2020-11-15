@@ -2,7 +2,7 @@
 
 module Resolvers
   class Me < BaseResolver
-    type Types::CurrentUserType, null: true
+    type Types::UserType, null: true
 
     def resolve
       authorize! current_user || User.new, to: :me?

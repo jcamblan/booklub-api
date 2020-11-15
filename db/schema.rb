@@ -10,11 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_11_090251) do
+ActiveRecord::Schema.define(version: 2020_11_15_110152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "authors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "books", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title", null: false
@@ -25,6 +31,8 @@ ActiveRecord::Schema.define(version: 2020_10_11_090251) do
     t.integer "selection_count", default: 0, null: false
     t.integer "note_count", default: 0, null: false
     t.float "average_note", default: 0.0, null: false
+    t.uuid "author_id"
+    t.string "google_book_id"
     t.index ["average_note"], name: "index_books_on_average_note"
     t.index ["selection_count"], name: "index_books_on_selection_count"
     t.index ["submission_count"], name: "index_books_on_submission_count"
@@ -142,6 +150,7 @@ ActiveRecord::Schema.define(version: 2020_10_11_090251) do
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end
 
+  add_foreign_key "books", "authors"
   add_foreign_key "club_users", "clubs"
   add_foreign_key "club_users", "users"
   add_foreign_key "clubs", "users", column: "manager_id"

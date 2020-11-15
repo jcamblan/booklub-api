@@ -13,12 +13,18 @@
 #  title            :string           not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  author_id        :uuid
+#  google_book_id   :string
 #
 # Indexes
 #
 #  index_books_on_average_note      (average_note)
 #  index_books_on_selection_count   (selection_count)
 #  index_books_on_submission_count  (submission_count)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (author_id => authors.id)
 #
 Fabricator(:book) do
   title { Faker::Book.title }

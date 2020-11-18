@@ -45,6 +45,7 @@ class User < ApplicationRecord
                            inverse_of: :manager
   has_many :club_users, dependent: :destroy
   has_many :clubs, through: :club_users
+  has_many :sessions, through: :clubs
   has_many :submissions, dependent: :destroy
   has_many :notes, dependent: :destroy
 

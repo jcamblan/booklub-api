@@ -22,4 +22,5 @@ class SessionPolicy < ApplicationPolicy
   end
 
   alias_rule :show?, to: :club_member?
+  alias_rule :list_mine?, to: :authenticated?
 end

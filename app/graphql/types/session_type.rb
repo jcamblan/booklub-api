@@ -5,6 +5,7 @@ module Types
     # == Order =================================================================
 
     class Types::SessionOrderBy < ::Types::BaseEnum
+      value :next_step_date
       value :submission_due_date
       value :read_due_date
       value :state

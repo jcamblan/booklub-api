@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Types
   class AuthorType < Types::BaseModelType
     global_id_field :id

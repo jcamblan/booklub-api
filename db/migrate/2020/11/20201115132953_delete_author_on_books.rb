@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DeleteAuthorOnBooks < ActiveRecord::Migration[6.0]
   def change
     create_table :author_books, id: :uuid do |t|

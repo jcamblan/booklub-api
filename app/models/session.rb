@@ -6,6 +6,7 @@
 #
 #  id                  :uuid             not null, primary key
 #  name                :string
+#  next_step_date      :datetime
 #  read_due_date       :datetime         not null
 #  state               :string           default("submission"), not null
 #  submission_due_date :datetime         not null
@@ -56,6 +57,7 @@ class Session < ApplicationRecord
 
   after_create :apply_default_name
   after_create :archive_previous_session
+  before_update :set_next_step_date
 
   # == State Machine ===========================================================
 
@@ -127,5 +129,9 @@ class Session < ApplicationRecord
 
   def state_follows?(state_comparison)
     STATES.find_index(state) > STATES.find_index(state_comparison.to_s)
+  end
+
+  def set_next_step_date
+    self.next_step_date = state_follows?('draw') ? read_due_date : submission_due_date
   end
 end

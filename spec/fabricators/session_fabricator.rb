@@ -6,6 +6,7 @@
 #
 #  id                  :uuid             not null, primary key
 #  name                :string
+#  next_step_date      :datetime
 #  read_due_date       :datetime         not null
 #  state               :string           default("submission"), not null
 #  submission_due_date :datetime         not null

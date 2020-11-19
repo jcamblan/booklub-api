@@ -28,7 +28,7 @@ Rails.application.configure do
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  config.active_storage.service = :digitalocean
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
@@ -52,6 +52,6 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.hosts << 'julien.local'
-  config.hosts << '39cdd8824c70.ngrok.io'
+  config.hosts << '8cc2f5a43413.ngrok.io'
   config.hosts << ENV['API_BASE_URL']
 end

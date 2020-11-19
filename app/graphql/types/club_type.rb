@@ -11,6 +11,7 @@ module Types
     field :manager, UserType, null: true
     field :sessions, SessionType.connection_type, null: true
     field :current_session, Types::SessionType, null: true
+    field :banner_url, String, null: true
 
     expose_authorization_rules :create_session?
 

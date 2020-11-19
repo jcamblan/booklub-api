@@ -26,6 +26,8 @@ class Club < ApplicationRecord
   # == Extensions ==============================================================
   # == Relationships ===========================================================
 
+  has_one_attached :banner
+
   belongs_to :manager, class_name: 'User'
   has_many :club_users, dependent: :destroy
   has_many :users, through: :club_users
@@ -44,6 +46,10 @@ class Club < ApplicationRecord
 
   # == Class Methods ===========================================================
   # == Instance Methods ========================================================
+
+  def banner_url
+    banner&.service_url
+  end
 
   # generate a new unique code and assign it to instance
   # save is still required.

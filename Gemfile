@@ -7,6 +7,8 @@ ruby '2.6.6'
 
 gem 'aasm', '~> 5.1', '>= 5.1.1' # https://github.com/aasm/aasm
 gem 'action_policy-graphql', '~> 0.3' # https://github.com/palkan/action_policy-graphql
+gem 'apollo_upload_server', '2.0.3'
+gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.4.2', require: false # https://github.com/Shopify/bootsnap
 gem 'clearance', '~> 2.1' # https://github.com/thoughtbot/clearance/
 gem 'counter_culture', '~> 2.6' # https://github.com/magnusvk/counter_culture
@@ -17,6 +19,7 @@ gem 'dry-rails', '~> 0.1'
 gem 'dry-struct', '~> 1.3'
 gem 'dry-types', '~> 1.4'
 gem 'graphql', '~> 1.10' # https://github.com/rmosolgo/graphql-ruby
+gem 'image_processing'
 gem 'pg', '>= 0.18', '< 2.0' # https://github.com/ged/ruby-pg
 gem 'puma', '~> 4.1'
 gem 'rack-cors'

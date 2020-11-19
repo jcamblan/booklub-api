@@ -6,14 +6,27 @@ module Mutations
     field :errors, [Types::ValidationErrorType], null: false
 
     argument :name, String, required: true
+    argument :file, ApolloUploadServer::Upload, required: false
 
-    def resolve(name:)
+    def resolve(**args)
       authorize! Club, to: :create?
 
       with_validation! do
-        club = Club.create!(name: name, manager: current_user)
+        args[:manager] = current_user
+        args[:banner] = blobify(args.delete(:file)) if args[:file]
+
+        club = Club.create!(args)
+
         { club: club, errors: [] }
       end
+    end
+
+    def blobify(file)
+      ActiveStorage::Blob.create_and_upload!(
+        io: file,
+        filename: file.original_filename,
+        content_type: file.content_type
+      )
     end
   end
 end

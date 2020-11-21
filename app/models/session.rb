@@ -61,7 +61,7 @@ class Session < ApplicationRecord
 
   # == State Machine ===========================================================
 
-  aasm column: 'state' do
+  aasm column: 'state' do # rubocop:disable Metrics/BlockLength
     state :submission, initial: true, display: I18n.t('models.session.state.submission')
     state :draw, display: I18n.t('models.session.state.draw')
     state :reading, display: I18n.t('models.session.state.reading')
@@ -70,7 +70,11 @@ class Session < ApplicationRecord
 
     event :start_draw do
       after do
-        SessionDrawJob.perform_later(self)
+        if submissions.count.zero?
+          destroy!
+        else
+          SessionDrawJob.perform_later(self)
+        end
       end
 
       transitions from: :submission, to: :draw

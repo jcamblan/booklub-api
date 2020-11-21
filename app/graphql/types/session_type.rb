@@ -18,11 +18,30 @@ module Types
       argument :direction, Types::OrderDirection, required: true
     end
 
+    # == Filter ================================================================
+
+    class Types::SessionState < ::Types::BaseEnum
+      Session::STATES.map do |enum|
+        value enum.to_sym
+      end
+    end
+
+    class Types::SessionStateInput < ::Types::BaseInputObject
+      argument :eq, Types::SessionState, required: false
+      argument :ne, Types::SessionState, required: false
+      argument :in, [Types::SessionState], required: false
+      argument :nin, [Types::SessionState], required: false
+    end
+
+    class Types::SessionFilterInput < ::Types::BaseInputObject
+      argument :state, Types::SessionStateInput, required: false
+    end
+
     # == Fields ================================================================
 
     global_id_field :id
     field :club, Types::ClubType, null: false
-    field :state, String, null: false
+    field :state, Types::SessionState, null: false
     field :name, String, null: true
     field :submission_due_date, GraphQL::Types::ISO8601DateTime, null: false
     field :read_due_date, GraphQL::Types::ISO8601DateTime, null: false

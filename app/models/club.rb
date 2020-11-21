@@ -48,6 +48,8 @@ class Club < ApplicationRecord
   # == Instance Methods ========================================================
 
   def banner_url
+    return if banner.attachment.nil?
+
     banner&.service_url
   end
 

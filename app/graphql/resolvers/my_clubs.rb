@@ -6,7 +6,7 @@ module Resolvers
 
     def resolve
       authorize! Club, to: :list_mine?
-      current_user.clubs
+      current_user.clubs.order(updated_at: :desc)
     end
   end
 end

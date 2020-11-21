@@ -30,7 +30,7 @@ class Submission < ApplicationRecord
   # == Extensions ==============================================================
   # == Relationships ===========================================================
 
-  belongs_to :session
+  belongs_to :session, touch: true
   belongs_to :user
   belongs_to :book
 

@@ -36,7 +36,7 @@ class Session < ApplicationRecord
 
   # == Relationships ===========================================================
 
-  belongs_to :club
+  belongs_to :club, touch: true
   belongs_to :selected_book, optional: true, class_name: 'Book'
   has_many :submissions, dependent: :destroy
   has_many :notes, dependent: :destroy

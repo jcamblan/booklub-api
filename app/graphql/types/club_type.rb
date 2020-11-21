@@ -11,6 +11,7 @@ module Types
     field :manager, UserType, null: true
     field :sessions, SessionType.connection_type, null: true do
       argument :filter, Types::SessionFilterInput, required: false
+      argument :order, Types::SessionOrder, required: false
     end
     field :current_session, Types::SessionType, null: true
     field :banner_url, String, null: true

@@ -24,7 +24,7 @@ module Types
 
     def sessions(**args)
       res = connection_with_arguments(object.sessions, args)
-      res = apply_filter(res, args[:filters])
+      apply_filter(res, args[:filters])
     end
   end
 end

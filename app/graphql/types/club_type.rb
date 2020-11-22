@@ -20,7 +20,7 @@ module Types
 
     def current_session
       object.sessions.order(created_at: :desc)
-            .find_by(state: %w[submission draw reading conclusion])
+            .find_by(state: %w[submission draw reading])
     end
 
     def sessions(**args)

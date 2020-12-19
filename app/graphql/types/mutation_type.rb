@@ -10,6 +10,7 @@ module Types
     # == Club management =======================================================
 
     field :create_club, mutation: Mutations::CreateClub
+    field :update_club, mutation: Mutations::UpdateClub
     field :join_club, mutation: Mutations::JoinClub
     field :reset_club_invitation_code, mutation: Mutations::ResetClubInvitationCode
 

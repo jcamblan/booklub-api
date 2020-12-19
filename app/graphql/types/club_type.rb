@@ -16,7 +16,7 @@ module Types
     field :current_session, Types::SessionType, null: true
     field :banner_url, String, null: true
 
-    expose_authorization_rules :create_session?
+    expose_authorization_rules :create_session?, :update?
 
     def current_session
       object.sessions.order(created_at: :desc)

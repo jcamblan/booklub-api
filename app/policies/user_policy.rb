@@ -12,5 +12,5 @@ class UserPolicy < ApplicationPolicy
     User.joins(:clubs).where(clubs: { id: user.club_ids }).distinct.include?(record)
   end
 
-  alias_rule :email?, to: :me?
+  alias_rule :email?, :update?, to: :me?
 end

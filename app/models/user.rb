@@ -21,6 +21,9 @@
 class User < ApplicationRecord
   # == Constants ===============================================================
   # == Attributes ==============================================================
+
+  attr_accessor :current_password
+
   # == Extensions ==============================================================
 
   include Clearance::User
@@ -53,8 +56,17 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: { case_sensitive: false }
 
+  validate :check_password, on: :update
+
   # == Scopes ==================================================================
   # == Callbacks ===============================================================
   # == Class Methods ===========================================================
   # == Instance Methods ========================================================
+
+  def check_password
+    return if password.nil? && !email_changed?
+    return if User.authenticate(email_in_database, current_password)
+
+    errors.add(:password, :invalid_current_password)
+  end
 end

@@ -57,3 +57,5 @@ Style/RedundantFetchBlock:
   Enabled: true
 RSpec/MultipleExpectations:
   Max: 4
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false

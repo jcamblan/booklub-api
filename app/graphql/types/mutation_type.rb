@@ -6,6 +6,7 @@ module Types
 
     field :register, mutation: Mutations::Register
     field :sign_in, mutation: Mutations::SignIn
+    field :update_personal_data, mutation: Mutations::UpdatePersonalData
 
     # == Club management =======================================================
 

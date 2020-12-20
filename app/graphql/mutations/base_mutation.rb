@@ -54,5 +54,13 @@ module Mutations
         error: error
       }
     end
+
+    def blobify(file)
+      ActiveStorage::Blob.create_and_upload!(
+        io: file,
+        filename: file.original_filename,
+        content_type: file.content_type
+      )
+    end
   end
 end

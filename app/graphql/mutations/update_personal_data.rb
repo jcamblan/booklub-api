@@ -9,11 +9,13 @@ module Mutations
     argument :email, String, required: false
     argument :password, String, required: false
     argument :current_password, String, required: false
+    argument :avatar, ApolloUploadServer::Upload, required: false
 
     def resolve(**args)
       authorize! current_user, to: :update?
 
       with_validation! do
+        args[:avatar] = blobify(args.delete(:avatar)) if args[:avatar]
         current_user.assign_attributes(args)
         current_user.save!
         { user: current_user, errors: [] }

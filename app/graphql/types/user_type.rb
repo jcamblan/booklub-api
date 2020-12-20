@@ -7,5 +7,6 @@ module Types
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :username, String, null: true
     field :email, String, null: true, authorize_field: true
+    field :avatar_url, String, null: true
   end
 end

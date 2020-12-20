@@ -30,6 +30,8 @@ class User < ApplicationRecord
 
   # == Relationships ===========================================================
 
+  has_one_attached :avatar
+
   # rubocop:disable Rails/InverseOf
   has_many :access_grants,
            class_name: 'Doorkeeper::AccessGrant',
@@ -62,6 +64,12 @@ class User < ApplicationRecord
   # == Callbacks ===============================================================
   # == Class Methods ===========================================================
   # == Instance Methods ========================================================
+
+  def avatar_url
+    return if avatar.attachment.nil?
+
+    avatar&.service_url
+  end
 
   def check_password
     return if password.nil? && !email_changed?

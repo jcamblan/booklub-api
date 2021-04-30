@@ -23,7 +23,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.6.6
+          ruby-version: 2.7.3
       - name: Install dependencies
         run: gem install activesupport:6.0.3.2 rubocop rubocop-rails rubocop-rspec brakeman bundler-audit
       - name: Bundle audit
@@ -55,7 +55,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.6.6
+          ruby-version: 2.7.3
           bundler-cache: true
       - name: Setup database
         run: bundle exec rails db:create db:schema:load

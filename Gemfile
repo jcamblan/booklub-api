@@ -3,8 +3,6 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.6'
-
 gem 'aasm', '~> 5.1', '>= 5.1.1' # https://github.com/aasm/aasm
 gem 'action_policy-graphql', '~> 0.3' # https://github.com/palkan/action_policy-graphql
 gem 'apollo_upload_server', '2.0.3'

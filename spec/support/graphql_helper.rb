@@ -21,7 +21,7 @@ module Requests
       }, headers: {
         Authorization: "Bearer #{token&.token}"
       }
-      puts json
+      # puts json
     end
 
     # by default, variables is empty indeed

@@ -22,5 +22,5 @@
 #
 Fabricator(:club) do
   name { Faker::Company.name }
-  manager { Fabricate(:user) }
+  manager(fabricator: :user)
 end

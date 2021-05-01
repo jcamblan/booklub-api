@@ -42,7 +42,7 @@ class Club < ApplicationRecord
   # == Callbacks ===============================================================
 
   before_validation :generate_invitation_code, on: :create
-  before_validation :add_manager_to_users, on: :create
+  after_commit :add_manager_to_users
 
   # == Class Methods ===========================================================
   # == Instance Methods ========================================================
@@ -73,6 +73,6 @@ class Club < ApplicationRecord
 
   # Automatically add club manager to club users list through callback
   def add_manager_to_users
-    users << manager
+    users << manager unless users.include?(manager)
   end
 end

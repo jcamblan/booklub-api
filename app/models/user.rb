@@ -73,7 +73,7 @@ class User < ApplicationRecord
 
   def check_password
     return if password.nil? && !email_changed?
-    return if User.authenticate(email_in_database, current_password)
+    return if User.authenticate(email_in_database, current_password || password)
 
     errors.add(:password, :invalid_current_password)
   end

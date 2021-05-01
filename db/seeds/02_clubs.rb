@@ -20,19 +20,19 @@ session = club.sessions.create_with(
 ).find_or_create_by(name: 'Session 1')
 
 session.submissions
-       .create_with(book: Book.find_or_create_by(title: 'Ubik', author: 'Philip K Dick'))
+       .create_with(book: Book.find_or_create_by(title: 'Ubik', authors: [Author.find_or_create_by(name: 'Philip K Dick')]))
        .find_or_create_by(user: julien)
 session.submissions
-       .create_with(book: Book.find_or_create_by(title: 'Le dahlia noir', author: 'James Ellroy'))
+       .create_with(book: Book.find_or_create_by(title: 'Le dahlia noir', authors: [Author.find_or_create_by(name: 'James Ellroy')]))
        .find_or_create_by(user: cynthia)
 session.submissions
-       .create_with(book: Book.find_or_create_by(title: 'Des fleurs pour Algernon', author: 'Daniel Keyes'))
+       .create_with(book: Book.find_or_create_by(title: 'Des fleurs pour Algernon', authors: [Author.find_or_create_by(name: 'Daniel Keyes')]))
        .find_or_create_by(user: maxime)
 session.submissions
-       .create_with(book: Book.find_or_create_by(title: 'Bazaar', author: 'Stephen King'))
+       .create_with(book: Book.find_or_create_by(title: 'Bazaar', authors: [Author.find_or_create_by(name: 'Stephen King')]))
        .find_or_create_by(user: henri)
 session.submissions
-       .create_with(book: Book.find_or_create_by(title: 'Le monde selon Garp', author: 'John Irving'))
+       .create_with(book: Book.find_or_create_by(title: 'Le monde selon Garp', authors: [Author.find_or_create_by(name: 'John Irving')]))
        .find_or_create_by(user: mbela)
 session.update(selected_book: Book.find_by(title: 'Le dahlia noir'), state: 'archived')
 
@@ -46,16 +46,16 @@ session = club.sessions.create_with(
   read_due_date: 4.months.ago
 ).find_or_create_by(name: 'Session 2')
 session.submissions
-       .create_with(book: Book.find_or_create_by(title: 'Fondation', author: 'Isaac Asimov'))
+       .create_with(book: Book.find_or_create_by(title: 'Fondation', authors: [Author.find_or_create_by(name: 'Isaac Asimov')]))
        .find_or_create_by(user: julien)
 session.submissions
-       .create_with(book: Book.find_or_create_by(title: 'Le portrait de Dorian Gray', author: 'Oscar Wilde'))
+       .create_with(book: Book.find_or_create_by(title: 'Le portrait de Dorian Gray', authors: [Author.find_or_create_by(name: 'Oscar Wilde')]))
        .find_or_create_by(user: cynthia)
 session.submissions
        .create_with(book: Book.find_by(title: 'Des fleurs pour Algernon'))
        .find_or_create_by(user: maxime)
 session.submissions
-       .create_with(book: Book.find_or_create_by(title: "Candide ou l'optimisme", author: 'Voltaire'))
+       .create_with(book: Book.find_or_create_by(title: "Candide ou l'optimisme", authors: [Author.find_or_create_by(name: 'Voltaire')]))
        .find_or_create_by(user: henri)
 session.submissions
        .create_with(book: Book.find_by(title: 'Le monde selon Garp'))
@@ -73,19 +73,19 @@ session = club.sessions.create_with(
 ).find_or_create_by(name: 'Session 3')
 
 session.submissions
-       .create_with(book: Book.find_or_create_by(title: 'La chute des géants', author: 'Ken Follet'))
+       .create_with(book: Book.find_or_create_by(title: 'La chute des géants', authors: [Author.find_or_create_by(name: 'Ken Follet')]))
        .find_or_create_by(user: julien)
 session.submissions
-       .create_with(book: Book.find_or_create_by(title: 'Le vol des cygognes', author: 'Jean Cristophe Grangé'))
+       .create_with(book: Book.find_or_create_by(title: 'Le vol des cygognes', authors: [Author.find_or_create_by(name: 'Jean Cristophe Grangé')]))
        .find_or_create_by(user: cynthia)
 session.submissions
        .create_with(book: Book.find_by(title: 'Des fleurs pour Algernon'))
        .find_or_create_by(user: maxime)
 session.submissions
-       .create_with(book: Book.find_or_create_by(title: 'Orgueil et Préjugés', author: 'Jane Austen'))
+       .create_with(book: Book.find_or_create_by(title: 'Orgueil et Préjugés', authors: [Author.find_or_create_by(name: 'Jane Austen')]))
        .find_or_create_by(user: henri)
 session.submissions
-       .create_with(book: Book.find_or_create_by(title: 'La Conjuration des imbéciles', author: 'John Kennedy Toole'))
+       .create_with(book: Book.find_or_create_by(title: 'La Conjuration des imbéciles', authors: [Author.find_or_create_by(name: 'John Kennedy Toole')]))
        .find_or_create_by(user: mbela)
 session.update(selected_book: Book.find_by(title: 'Le vol des cygognes'), state: 'archived')
 
@@ -102,18 +102,18 @@ session = club.sessions.create_with(
 ).find_or_create_by(name: 'Session 4')
 
 session.submissions
-       .create_with(book: Book.find_or_create_by(title: 'La chute des géants', author: 'Ken Follet'))
+       .create_with(book: Book.find_or_create_by(title: 'La chute des géants', authors: [Author.find_or_create_by(name: 'Ken Follet')]))
        .find_or_create_by(user: julien)
 session.submissions
-       .create_with(book: Book.find_or_create_by(title: 'La Ferme des animaux', author: 'George Orwell'))
+       .create_with(book: Book.find_or_create_by(title: 'La Ferme des animaux', authors: [Author.find_or_create_by(name: 'George Orwell')]))
        .find_or_create_by(user: cynthia)
 session.submissions
        .create_with(book: Book.find_by(title: 'Des fleurs pour Algernon'))
        .find_or_create_by(user: maxime)
 session.submissions
-       .create_with(book: Book.find_or_create_by(title: 'Les androïdes rêvent-ils de moutons électriques ?', author: 'Philip K. Dick'))
+       .create_with(book: Book.find_or_create_by(title: 'Les androïdes rêvent-ils de moutons électriques ?', authors: [Author.find_or_create_by(name: 'Philip K. Dick')]))
        .find_or_create_by(user: henri)
 session.submissions
-       .create_with(book: Book.find_or_create_by(title: 'La Ferme des animaux', author: 'George Orwell'))
+       .create_with(book: Book.find_or_create_by(title: 'La Ferme des animaux', authors: [Author.find_or_create_by(name: 'George Orwell')]))
        .find_or_create_by(user: mbela)
 session.update(selected_book: Book.find_by(title: 'Les androïdes rêvent-ils de moutons électriques ?'), state: 'reading')

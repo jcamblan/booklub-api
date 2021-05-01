@@ -37,3 +37,4 @@
 coverage/**/*
 .keep
 .envrc
+examples.txt

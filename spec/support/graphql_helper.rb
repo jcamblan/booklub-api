@@ -52,5 +52,10 @@ module Requests
     def mutation_errors
       response_body.dig('data', described_class.graphql_name.camelize(:lower), 'errors')
     end
+
+    def expect_string_locale_equality(string, locale_path)
+      expect(I18n.t(locale_path)).not_to match(/translation missing/)
+      expect(string).to eq(I18n.t(locale_path))
+    end
   end
 end

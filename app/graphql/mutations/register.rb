@@ -2,7 +2,7 @@
 
 module Mutations
   class Register < BaseMutation
-    field :success, Boolean, null: true
+    field :user, Types::UserType, null: true
     field :errors, [Types::ValidationErrorType], null: false
 
     argument :username, String, required: true
@@ -11,8 +11,9 @@ module Mutations
 
     def resolve(**args)
       with_validation! do
-        User.create!(args)
-        { success: true, errors: [] }
+        user = User.create!(args)
+        context[:current_user] = user
+        { user: user, errors: [] }
       end
     end
   end

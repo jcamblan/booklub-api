@@ -3,8 +3,8 @@
 module Requests
   module GraphqlHelpers
     # Nothing fancy here, I just parse the body response before using it below
-    def json
-      JSON.parse(response.body)
+    def response_body
+      ActiveSupport::HashWithIndifferentAccess.new(JSON.parse(response.body))
     end
 
     # This method launch the graphql request with the `query` and `variables` variables
@@ -21,7 +21,6 @@ module Requests
       }, headers: {
         Authorization: "Bearer #{token&.token}"
       }
-      # puts json
     end
 
     # by default, variables is empty indeed
@@ -35,7 +34,7 @@ module Requests
       it 'return unauthorized error message' do
         do_graphql_request
 
-        expect(json['errors'].map { |e| e.dig('extensions', 'code') })
+        expect(response_body['errors'].map { |e| e.dig('extensions', 'code') })
           .to include('Unauthorized')
       end
     end
@@ -51,7 +50,7 @@ module Requests
     # field :object, Types::ObjectType, null: true
     # field :errors, [Types::MutationErrorType], null: true
     def mutation_errors
-      json.dig('data', described_class.graphql_name.camelize(:lower), 'errors')
+      response_body.dig('data', described_class.graphql_name.camelize(:lower), 'errors')
     end
   end
 end

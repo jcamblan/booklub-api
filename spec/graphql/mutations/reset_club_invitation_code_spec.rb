@@ -5,7 +5,7 @@ RSpec.describe Mutations::ResetClubInvitationCode, type: :request do # rubocop:d
   let(:club) { Fabricate(:club, manager: manager) }
   let!(:initial_code) { club.invitation_code }
 
-  let(:result) { json.dig('data', 'resetClubInvitationCode', 'club') }
+  let(:result) { response_body.dig('data', 'resetClubInvitationCode', 'club') }
 
   context 'when current_user is the club manager' do
     let(:current_user) { manager }
@@ -39,7 +39,7 @@ RSpec.describe Mutations::ResetClubInvitationCode, type: :request do # rubocop:d
 
     it 'returns nil' do
       do_graphql_request
-      expect(json.dig('data', 'resetClubInvitationCode')).to be nil
+      expect(response_body.dig('data', 'resetClubInvitationCode')).to be nil
     end
   end
 

@@ -3,7 +3,7 @@
 RSpec.describe Mutations::JoinClub, type: :request do # rubocop:disable Metrics/BlockLength
   let(:club) { Fabricate(:club, users: Fabricate.times(2, :user)) }
 
-  let(:result) { json.dig('data', 'joinClub', 'club') }
+  let(:result) { response_body.dig('data', 'joinClub', 'club') }
 
   context 'when invitationCode matches a club' do
     let(:invitation_code) { club.invitation_code }

@@ -3,7 +3,7 @@
 RSpec.describe Mutations::UpdateClub, type: :request do # rubocop:disable Metrics/BlockLength
   let(:club) { Fabricate(:club, users: Fabricate.times(2, :user)) }
 
-  let(:result) { json.dig('data', 'updateClub', 'club') }
+  let(:result) { response_body.dig('data', 'updateClub', 'club') }
   let(:name) { Faker::Lorem.sentence }
 
   context 'when current_user is club manager' do

@@ -9,7 +9,7 @@ RSpec.describe Mutations::CreateSubmission, type: :request do # rubocop:disable 
   let(:authors) { %w[Riri Fifi Loulou] }
   let(:google_book_id) { '123AZERTY' }
 
-  let(:result) { json.dig('data', 'createSubmission', 'submission') }
+  let(:result) { response_body.dig('data', 'createSubmission', 'submission') }
 
   it 'creates a new session' do
     do_graphql_request

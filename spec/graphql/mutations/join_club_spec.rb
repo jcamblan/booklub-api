@@ -45,7 +45,6 @@ RSpec.describe Mutations::JoinClub, type: :request do
             invitationCode
           }
           errors {
-            path
             message
             attribute
             error

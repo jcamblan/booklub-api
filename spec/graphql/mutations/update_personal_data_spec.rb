@@ -65,7 +65,6 @@ RSpec.describe Mutations::UpdatePersonalData, type: :request do
             email
           }
           errors {
-            path
             message
             attribute
             error

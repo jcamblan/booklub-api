@@ -38,7 +38,6 @@ RSpec.describe Mutations::CreateSubmission, type: :request do
             }
           }
           errors {
-            path
             message
             attribute
             error

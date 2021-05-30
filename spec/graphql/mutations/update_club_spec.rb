@@ -32,7 +32,6 @@ RSpec.describe Mutations::UpdateClub, type: :request do
             bannerUrl
           }
           errors {
-            path
             message
             attribute
             error

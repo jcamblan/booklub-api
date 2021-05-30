@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mutations::ResetClubInvitationCode, type: :request do # rubocop:disable Metrics/BlockLength
+RSpec.describe Mutations::ResetClubInvitationCode, type: :request do
   let(:manager) { Fabricate(:user) }
   let(:club) { Fabricate(:club, manager: manager) }
   let!(:initial_code) { club.invitation_code }

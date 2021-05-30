@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mutations::UpdateClub, type: :request do # rubocop:disable Metrics/BlockLength
+RSpec.describe Mutations::UpdateClub, type: :request do
   let(:club) { Fabricate(:club, users: Fabricate.times(2, :user)) }
 
   let(:result) { response_body.dig('data', 'updateClub', 'club') }

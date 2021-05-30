@@ -10,4 +10,5 @@
 #  updated_at :datetime         not null
 #
 Fabricator(:author) do
+  name { Faker::Lorem.sentence }
 end

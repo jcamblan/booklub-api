@@ -9,7 +9,8 @@ RSpec.describe Mutations::Register, type: :request do
     let(:email) { Faker::Internet.unique.email }
 
     it 'creates a new user' do
-      do_graphql_request
+      post '/graphql', params: { query: query, variables: variables }
+
       expect(mutation_errors).to be_empty
       expect(User.last.attributes.slice('email', 'username'))
         .to eq(result.slice(:email, :username))
@@ -20,10 +21,13 @@ RSpec.describe Mutations::Register, type: :request do
     let(:email) { 'toto is not a valid email' }
 
     it 'returns a validation error' do # rubocop:disable RSpec/ExampleLength
-      do_graphql_request
+      post '/graphql', params: { query: query, variables: variables }
+
       expect(result).to be nil
       expect(mutation_errors.first[:attribute]).to eq('email')
       expect(mutation_errors.first[:error]).to eq('invalid')
+
+      # following method is a simple helper defined in spec/support/graphql_helper.rb
       expect_string_locale_equality(
         mutation_errors.first[:message],
         'activerecord.errors.models.user.attributes.email.invalid'
@@ -32,7 +36,7 @@ RSpec.describe Mutations::Register, type: :request do
   end
 
   def query
-    <<-GRAPHQL
+    <<~GRAPHQL
       mutation register(
         $email: String!
         $password: String!
@@ -44,9 +48,9 @@ RSpec.describe Mutations::Register, type: :request do
           username: $username
         }) {
             user {
-             id
-             email
-             username
+              id
+              email
+              username
             }
           errors {
             message

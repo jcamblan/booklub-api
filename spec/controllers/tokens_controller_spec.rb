@@ -17,6 +17,7 @@ RSpec.describe 'oauth2 controller', type: :request do
   it 'returns the right token' do
     post '/oauth/token', params: params
 
+    expect(response_body.keys).to include('access_token')
     expect(response_body[:access_token])
       .to eq(Doorkeeper::AccessToken.where(resource_owner_id: user.id).last&.token)
   end

@@ -6,6 +6,8 @@ fr:
           attributes:
             password:
               invalid_current_password: "Le mot passe actuel est nécessaire pour modifier l'email ou le mot de passe"
+            email:
+              invalid: Le format de l'adresse email est invalide.
   models:
     session:
       state:

@@ -16,39 +16,29 @@ module Mutations
     end
 
     # Wraps block with `RunResolverWithValidation`
-    def with_validation!(path: [])
+    def with_validation!
       Mutations::ValidationResolver.new.call do
         yield
       rescue ActiveRecord::RecordInvalid => e
-        validation_error validation_error_data(e.record.errors, path: path)
+        validation_error validation_error_data(e.record.errors)
       rescue ActiveRecord::RecordNotFound => e
-        validation_error [{ error: 'RecordNotFound', message: e.message, path: [] }]
+        validation_error [{ error: 'RecordNotFound', message: e.message }]
       end
-    end
-
-    def error_path!(path = [])
-      yield
-    rescue ActiveRecord::RecordInvalid => e
-      validation_error validation_error_data(e.record.errors, path: path)
     end
 
     # @param [ActiveModel::Errors]
     #
     # @return [Hash]
-    def validation_error_data(errors, path: [])
+    def validation_error_data(errors)
       errors.map do |attribute, message|
-        path = Array(path).map { |p| p.to_s.camelize(:lower) }
         error = errors.details.dig(attribute, 0, :error)
 
-        build_validation_error(attribute, message, error, path: path)
+        build_validation_error(attribute, message, error)
       end
     end
 
-    def build_validation_error(attribute, message, error, path: [])
-      path = Array(path).map { |p| p.to_s.camelize(:lower) }
-
+    def build_validation_error(attribute, message, error)
       {
-        path: ['attributes', *path, attribute.to_s.camelize(:lower)],
         message: message,
         attribute: attribute.to_s.camelize(:lower),
         error: error

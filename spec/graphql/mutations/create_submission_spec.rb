@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mutations::CreateSubmission, type: :request do # rubocop:disable Metrics/BlockLength
+RSpec.describe Mutations::CreateSubmission, type: :request do
   let(:current_user) { Fabricate(:user) }
   let(:club) { Fabricate(:club, users: [current_user]) }
   let(:session) { Fabricate(:session, club: club) }
@@ -9,12 +9,12 @@ RSpec.describe Mutations::CreateSubmission, type: :request do # rubocop:disable 
   let(:authors) { %w[Riri Fifi Loulou] }
   let(:google_book_id) { '123AZERTY' }
 
-  let(:result) { json.dig('data', 'createSubmission', 'submission') }
+  let(:result) { response_body.dig('data', 'createSubmission', 'submission') }
 
   it 'creates a new session' do
     do_graphql_request
     expect(mutation_errors).to be_empty
-    expect(result.dig('book', 'googleBookId')).to eq(google_book_id)
+    expect(result.dig(:book, :googleBookId)).to eq(google_book_id)
   end
 
   def query
@@ -38,7 +38,6 @@ RSpec.describe Mutations::CreateSubmission, type: :request do # rubocop:disable 
             }
           }
           errors {
-            path
             message
             attribute
             error

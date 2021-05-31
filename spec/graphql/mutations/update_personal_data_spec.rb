@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-RSpec.describe Mutations::UpdatePersonalData, type: :request do # rubocop:disable Metrics/BlockLength
+RSpec.describe Mutations::UpdatePersonalData, type: :request do
   let(:club) { Fabricate(:club, users: Fabricate.times(2, :user)) }
 
-  let(:result) { json.dig('data', 'updatePersonalData', 'user') }
-  let(:errors) { json.dig('data', 'updatePersonalData', 'errors') }
+  let(:result) { response_body.dig('data', 'updatePersonalData', 'user') }
+  let(:errors) { response_body.dig('data', 'updatePersonalData', 'errors') }
 
   let(:old_password) { 'toto' }
   let(:new_email) { Faker::Internet.email }
@@ -65,7 +65,6 @@ RSpec.describe Mutations::UpdatePersonalData, type: :request do # rubocop:disabl
             email
           }
           errors {
-            path
             message
             attribute
             error

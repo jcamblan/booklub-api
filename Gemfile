@@ -26,6 +26,7 @@ gem 'rack-livereload'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 gem 'sidekiq', '~> 6.1'
 gem 'simplecov', '~> 0.18.5' # https://github.com/colszowka/simplecov
+gem 'stimulus-rails'
 gem 'strong_migrations', '~> 0.6' # https://github.com/ankane/strong_migrations
 gem 'tailwindcss-rails'
 gem 'view_component', '~> 2.46'

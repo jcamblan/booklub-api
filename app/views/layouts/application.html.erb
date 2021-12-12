@@ -10,13 +10,14 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
   <body class="bg-white">
     <%= render partial: '/layouts/navbar', locals: { } %>
     <main class="container mx-auto flex flex-col bg-white min-h-screen">
-    <main class="container mx-auto mt-28 px-5 flex">
+      <main class="container mx-auto mt-28 px-5 flex">
         <%= yield %>
-    </main>
-  </body>
-</html>
+      </main>
+    </body>
+  </html>

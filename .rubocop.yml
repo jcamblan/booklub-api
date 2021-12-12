@@ -59,3 +59,5 @@ RSpec/MultipleExpectations:
   Max: 4
 RSpec/MultipleMemoizedHelpers:
   Enabled: false
+AllCops: 
+  NewCops: enable

@@ -1,0 +1,12 @@
+<div class="self-center justify-self-center flex-col flex mx-auto w-full">
+  <div class="w-full flex py-5 px-10 flex-col">
+    <h1 class="font-serif text-5xl font-black tracking-wider mx-auto">BOOKLUB</h1>
+
+    <%= render partial: '/sessions/form' %>
+
+  </div>
+  <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+
+</div>

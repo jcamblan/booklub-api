@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class GraphqlController < ApplicationController
+class GraphqlController < ActionController::API
   # If accessing from outside this domain, nullify the session
   # This allows for outside API access while preventing CSRF attacks,
   # but you'll have to authenticate your user separately
@@ -53,5 +53,11 @@ class GraphqlController < ApplicationController
     render json: {
       errors: [{ message: error.message, backtrace: error.backtrace }], data: {}
     }, status: :internal_server_error
+  end
+
+  def current_user
+    return unless doorkeeper_token
+
+    @current_user ||= User.find(doorkeeper_token.resource_owner_id)
   end
 end

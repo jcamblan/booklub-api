@@ -17,14 +17,19 @@ gem 'dry-rails', '~> 0.1'
 gem 'dry-struct', '~> 1.3'
 gem 'dry-types', '~> 1.4'
 gem 'graphql', '~> 1.10' # https://github.com/rmosolgo/graphql-ruby
+gem 'guard-livereload'
 gem 'image_processing'
 gem 'pg', '>= 0.18', '< 2.0' # https://github.com/ged/ruby-pg
 gem 'puma', '~> 4.1'
 gem 'rack-cors'
+gem 'rack-livereload'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 gem 'sidekiq', '~> 6.1'
 gem 'simplecov', '~> 0.18.5' # https://github.com/colszowka/simplecov
 gem 'strong_migrations', '~> 0.6' # https://github.com/ankane/strong_migrations
+gem 'tailwindcss-rails'
+gem 'view_component', '~> 2.46'
+gem 'webpacker', '~> 5.4'
 
 group :development, :test do
   gem 'brakeman' # https://github.com/presidentbeef/brakeman

@@ -1,0 +1,14 @@
+<%= form_for :session, url: session_path do |form| %>
+  <%= render partial: '/components/form/text_input', locals: { name: :email, form: form } %>
+
+  <%= render partial: '/components/form/password_input', locals: { name: :password, form: form } %>
+
+  <%= render partial: '/components/form/submit', locals: { form: form, text: t(".sign_in")} %>
+
+  <div class="other-links flex space-x-3">
+    <%= render(ButtonComponent.new(variant: 2)) { link_to t(".forgot_password"), new_password_path } %>
+    <% if Clearance.configuration.allow_sign_up? %>
+      <%= render(ButtonComponent.new(variant: 2)) { link_to t(".sign_up"), sign_up_path } %>
+    <% end %>
+  </div>
+<% end %>

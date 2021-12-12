@@ -1,0 +1,12 @@
+<div class="self-center justify-self-center flex-col flex mx-auto w-full">
+  <div class="w-full flex py-5 px-10 flex-col">
+    <h1 class="font-serif text-5xl font-black tracking-wider mx-auto">BOOKLUB</h1>
+
+    <%= form_for :password, url: passwords_path do |form| %>
+      <%= render partial: '/components/form/text_input', locals: { name: :email, form: form } %>
+      <%= render partial: '/components/form/submit', locals: { form: form, text: t('.reset_password')} %>
+    <% end %>
+
+    <%= render(ButtonComponent.new(variant: 2)) { link_to t('.sign_in'), sign_in_path } %>
+  </div>
+</div>

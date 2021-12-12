@@ -14,3 +14,22 @@ fr:
         reading: Lecture en cours
         conclusion: Compte-rendu
         archived: Archivé
+  sessions:
+    form:
+      sign_in: &sign_in Se connecter
+      forgot_password: Mot de passe oublié
+      sign_up: &sign_up Créer un compte
+  components:
+    form:
+      text_input:
+        email: Email
+      password_input:
+        password: Mot de passe
+  users:
+    new:
+      sign_up: *sign_up
+      sign_in: *sign_in
+  passwords:
+    new:
+      reset_password: Réinitialiser mon mot de passe
+      sign_in: *sign_in

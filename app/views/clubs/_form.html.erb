@@ -1,0 +1,16 @@
+<%= form_with(model: club) do |form| %>
+  <% if club.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(club.errors.count, "error") %> prohibited this club from being saved:</h2>
+
+      <ul>
+        <% club.errors.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= render partial: '/components/form/text_input', locals: { name: :name, form: form } %>
+  <%= render partial: '/components/form/submit', locals: { form: form, text: t(".create_club")} %>
+
+<% end %>

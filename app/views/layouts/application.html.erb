@@ -14,9 +14,11 @@
   </head>
 
   <body class="bg-white">
-    <%= render partial: '/layouts/navbar', locals: { } %>
-    <main class="container mx-auto flex flex-col bg-white min-h-screen">
-      <main class="container mx-auto mt-28 px-5 flex">
+    <% if signed_in? %>
+      <%= render partial: '/layouts/navbar', locals: { } %>
+    <% end %>
+    <main class="container mx-auto flex flex-col bg-white">
+      <main class="container mx-auto mt-5 px-5 flex">
         <%= yield %>
       </main>
     </body>

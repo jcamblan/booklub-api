@@ -1,8 +1,28 @@
 <!-- <%= render(HomeSvgComponent.new) %> -->
 
 <% if signed_in? %>
-  Signed in as: <%= current_user.email %>
-  <%= button_to 'Sign out', sign_out_path, method: :delete %>
+  <div class="self-center justify-self-center flex-col flex mx-auto w-full">
+    <% if current_user.clubs.empty? %>
+      <%= render partial: '/home/no_club', locals: { } %>
+    <% else %>
+      <h1 class="text-3xl font-extrabold tracking-wider mb-5"><%= t('.my_clubs') %></h1>
+      <div class="space-y-2 mb-5">
+        <% current_user.clubs.each do |club| %>
+          <div class="bg-gray-100 p-3 rounded-xl space-y-6">
+            <p class="text-3xl">😄</p>
+            <div>
+              <p class="text-gray-400 text-xs font-bold"><%= club.users.count %> <%= t('.member').pluralize(club.users.count).upcase %></p>
+              <%= link_to club.name, club, class: "text-2xl font-bold leading-6" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="space-y-2 mb-5 flex-col">
+        <%= render(ButtonComponent.new) { link_to t('.join_club'), sign_in_path } %>
+        <%= render(ButtonComponent.new(variant: 2)) { link_to t('.create_club'), new_club_path } %>
+      </div>
+    <% end %>
+  </div>
 <% else %>
   <div class="self-center justify-self-center flex-col flex mx-auto w-full">
     <h1 class="font-serif text-5xl font-black tracking-wider mx-auto">BOOKLUB</h1>

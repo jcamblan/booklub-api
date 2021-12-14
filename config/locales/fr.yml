@@ -23,6 +23,7 @@ fr:
     form:
       text_input:
         email: Email
+        club_name: Nom du club
       password_input:
         password: Mot de passe
   users:
@@ -33,3 +34,14 @@ fr:
     new:
       reset_password: Réinitialiser mon mot de passe
       sign_in: *sign_in
+  home:
+    no_club:
+      call_to_join_club: Create or join your first book club and start reading!
+      hey: Salut, %{name} !
+      join_club: Rejoindre un club
+      create_club: Créer un club
+    index:
+      member: membre
+  clubs:
+    form:
+      create_club: Créer mon club
